@@ -1,11 +1,13 @@
-const fs = require('fs');
 const path = require('path');
+const fs = require('fs-extra');
 const phin = require('phin');
 const cheerio = require('cheerio');
 
 const outputDir = process.env.OUTPUT_DIR || path.join(process.cwd(), 'output');
 
 (async () => {
+    await fs.ensureDir(outputDir);
+
     // phin is extremely simple to use. Just throw in a URL and get a response back via promise.
     let res = await phin('https://en.wikipedia.org/wiki/List_of_Emperors_of_Japan');
     
